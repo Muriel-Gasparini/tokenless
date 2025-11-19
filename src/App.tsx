@@ -5,8 +5,6 @@ import { freeTokenizer } from "./core/tokenizer";
 import { useDebounce } from "./hooks/useDebounce";
 import { Header } from "./components/Header";
 import { Settings } from "./components/Settings";
-import { InputArea } from "./components/InputArea";
-import { OutputArea } from "./components/OutputArea";
 import { SideBySideView } from "./components/SideBySideView";
 import { MetricsCards } from "./components/MetricsCards";
 
@@ -18,7 +16,6 @@ function App() {
   const [copied, setCopied] = useState(false);
   const [isCompressing, setIsCompressing] = useState(false);
   const [autoCopy, setAutoCopy] = useState(true);
-  const [sideBySide, setSideBySide] = useState(true);
 
   const debouncedInput = useDebounce(input, 500);
 
@@ -59,41 +56,20 @@ function App() {
         <Header />
 
         <Settings
-          sideBySide={sideBySide}
           autoCopy={autoCopy}
           copied={copied}
-          onSideBySideChange={setSideBySide}
           onAutoCopyChange={setAutoCopy}
         />
 
         <div className="space-y-6">
-          {sideBySide && result ? (
-            <SideBySideView
-              input={input}
-              result={result}
-              copied={copied}
-              autoCopy={autoCopy}
-              onCopy={() => handleCopy(result.compressed)}
-              onInputChange={setInput}
-            />
-          ) : (
-            <>
-              <InputArea
-                value={input}
-                onChange={setInput}
-                isCompressing={isCompressing}
-              />
-
-              {result && (
-                <OutputArea
-                  result={result}
-                  copied={copied}
-                  autoCopy={autoCopy}
-                  onCopy={() => handleCopy(result.compressed)}
-                />
-              )}
-            </>
-          )}
+          <SideBySideView
+            input={input}
+            result={result}
+            copied={copied}
+            autoCopy={autoCopy}
+            onCopy={() => result && handleCopy(result.compressed)}
+            onInputChange={setInput}
+          />
 
           {result && <MetricsCards result={result} />}
         </div>
