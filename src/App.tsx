@@ -14,7 +14,6 @@ function App() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState<CompressionResult | null>(null);
   const [copied, setCopied] = useState(false);
-  const [isCompressing, setIsCompressing] = useState(false);
   const [autoCopy, setAutoCopy] = useState(true);
 
   const debouncedInput = useDebounce(input, 500);
@@ -28,14 +27,11 @@ function App() {
   useEffect(() => {
     if (!debouncedInput.trim()) {
       setResult(null);
-      setIsCompressing(false);
       return;
     }
 
-    setIsCompressing(true);
     const compressionResult = orchestrator.compress(debouncedInput);
     setResult(compressionResult);
-    setIsCompressing(false);
 
     if (autoCopy && compressionResult.compressed) {
       navigator.clipboard.writeText(compressionResult.compressed);
