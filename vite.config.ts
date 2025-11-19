@@ -6,5 +6,5 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [react(), wasm(), topLevelAwait(), tailwindcss()],
-  base: process.env.NODE_ENV === 'production' ? '/tokenless/' : '/',
+  base: process.env.NODE_ENV === "production" ? "/tokenless/" : "/",
 });
