@@ -1,10 +1,10 @@
-import { BaseStrategy } from './base.strategy';
-import { splitWords, joinWords } from '../core/text-utils';
-import { lookupContraction } from '../data/ptbr-contractions';
+import { BaseStrategy } from "./base.strategy";
+import { splitWords, joinWords } from "../core/text-utils";
+import { lookupContraction } from "../data/ptbr-contractions";
 
 export class PtBrOptimizationStrategy extends BaseStrategy {
-  readonly name = 'Otimização PT-BR';
-  readonly priority = 0;
+  readonly name = "Otimização PT-BR";
+  readonly priority = 5;
 
   compress(text: string): string {
     const words = splitWords(text);
