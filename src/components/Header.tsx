@@ -16,6 +16,7 @@ export const Header = () => {
         Tokenless
       </h1>
       <p className="text-slate-400 text-lg">Otimização de prompts para LLMs</p>
+      <p className="text-slate-500 text-sm mt-2">Open source • Contribuições bem-vindas</p>
     </header>
   );
 };
