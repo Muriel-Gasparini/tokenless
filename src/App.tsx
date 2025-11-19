@@ -9,7 +9,6 @@ import { InputArea } from "./components/InputArea";
 import { OutputArea } from "./components/OutputArea";
 import { SideBySideView } from "./components/SideBySideView";
 import { MetricsCards } from "./components/MetricsCards";
-import { Footer } from "./components/Footer";
 
 const orchestrator = new CompressionOrchestrator();
 
@@ -98,8 +97,6 @@ function App() {
 
           {result && <MetricsCards result={result} />}
         </div>
-
-        <Footer />
       </div>
     </div>
   );
