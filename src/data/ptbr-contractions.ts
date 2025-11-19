@@ -21,6 +21,8 @@ const rawContractions: [string, string][] = [
   ["de acordo com", "segundo"],
   ["muitas", "mtas"],
   ["muitos", "mtos"],
+  ["a menos que", "unless"],
+  ["a não ser", "unless"],
   ["mais", "+"],
   ["menos", "-"],
   ["sempre", "smp"],
@@ -32,11 +34,26 @@ const rawContractions: [string, string][] = [
   ["possui", "tem"],
   ["queremos", "dev"],
   ["modificar", "mudar"],
-  ["que", "q"],
   ["por que", "pq"],
   ["porque", "pq"],
   ["quero", "qro"],
+  ["tiver sido", "for"],
+  ["não", "n"],
+  ["nao", "n"],
+  ["geração", "generation"],
+  ["inicie", "start"],
+  ["renovado", "renew"],
+  ["que o", "qo"],
+  ["que não há", "havent"],
 ];
+
+export const getCompoundContractions = (): [string, string][] => {
+  return rawContractions.filter(([pattern]) => pattern.includes(" "));
+};
+
+export const getSingleWordContractions = (): [string, string][] => {
+  return rawContractions.filter(([pattern]) => !pattern.includes(" "));
+};
 
 export const CONTRACTIONS = new Map<string, string>(
   rawContractions.map(([full, short]) => [normalizeText(full), short]),

@@ -19,10 +19,10 @@ const rawAbbreviations: [string, string][] = [
   ["aplicativo", "app"],
   ["aplicativos", "apps"],
   ["sistema", "sys"],
-  ["servico", "svc"],
-  ["servicos", "svcs"],
-  ["processo", "proc"],
-  ["processos", "procs"],
+  ["servico", "service"],
+  ["servicos", "services"],
+  ["processo", "process"],
+  ["processos", "process"],
   ["problema", "prob"],
   ["problemas", "probs"],
   ["documento", "doc"],
@@ -47,12 +47,10 @@ const rawAbbreviations: [string, string][] = [
   ["usuarios", "users"],
   ["banco de dados", "db"],
   ["base de dados", "db"],
-  ["tabela", "tbl"],
-  ["tabelas", "tbls"],
+  ["tabela", "table"],
+  ["tabelas", "tables"],
   ["coluna", "col"],
   ["colunas", "cols"],
-  ["registro", "reg"],
-  ["registros", "regs"],
   ["consulta", "query"],
   ["consultas", "queries"],
   ["autenticacao", "auth"],
@@ -77,8 +75,6 @@ const rawAbbreviations: [string, string][] = [
   ["argumentos", "args"],
   ["requisicao", "req"],
   ["requisicoes", "reqs"],
-  ["resposta", "res"],
-  ["respostas", "responses"],
   ["mensagem", "msg"],
   ["mensagens", "msgs"],
   ["notificacao", "notif"],
@@ -132,6 +128,14 @@ const rawAbbreviations: [string, string][] = [
   ["gerado", "gen"],
   ["gerados", "gen"],
 ];
+
+export const getCompoundAbbreviations = (): [string, string][] => {
+  return rawAbbreviations.filter(([pattern]) => pattern.includes(' '));
+};
+
+export const getSingleWordAbbreviations = (): [string, string][] => {
+  return rawAbbreviations.filter(([pattern]) => !pattern.includes(' '));
+};
 
 export const ABBREVIATION_MAP = new Map<string, string>(
   rawAbbreviations.map(([full, short]) => [normalizeText(full), short]),
