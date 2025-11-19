@@ -4,7 +4,7 @@ export const Header = () => {
       <h1 className="text-5xl font-bold text-white mb-3 tracking-tight">
         Tokenless
       </h1>
-      <p className="text-slate-400 text-lg">Redução de tokens mantendo significado</p>
+      <p className="text-slate-400 text-lg">Otimização de prompts para LLMs</p>
     </header>
   );
 };
