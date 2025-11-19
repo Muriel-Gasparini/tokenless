@@ -35,12 +35,7 @@ export const SideBySideView = ({
 
       <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl border border-green-800/50 p-6 shadow-2xl transition-all hover:border-green-700/50">
         <div className="flex justify-between items-center mb-3">
-          <div>
-            <h3 className="text-sm font-semibold text-green-300">Resultado Comprimido</h3>
-            <p className="text-xs text-slate-500 mt-1">
-              {result.strategiesApplied.join(', ')}
-            </p>
-          </div>
+          <h3 className="text-sm font-semibold text-green-300">Resultado Comprimido</h3>
           <div className="flex items-center gap-2">
             <span className="text-xs text-green-400">{result.compressedTokens} tokens</span>
             {!autoCopy && (
