@@ -18,14 +18,6 @@ Technical abbreviation replaces common programming terms with standard short for
 
 English contractions are applied where appropriate, converting "do not" to "don't", "cannot" to "can't", and similar patterns. All 38 standard English contractions are supported.
 
-## Token Reduction Examples
-
-| Original (Portuguese) | Translated (English) | Compressed | Reduction |
-|----------------------|---------------------|------------|-----------|
-| Por favor, você poderia me dar uma explicação clara e simples sobre como validar os arquivos importantes que falharam? | Please, could you give me a clear and simple explanation about how to validate the important files that failed? | give me explanation about how validate files that failed? | 73% |
-| Preciso que você verifique o sistema de autenticação | I need you to check the authentication system | check authentication system | 67% |
-| Gostaria de uma análise completa dos erros | I would like a complete analysis of the errors | analysis of errors | 60% |
-
 ## Performance Comparison
 
 The previous approach compressed Portuguese text directly, achieving approximately 20% token reduction but risking semantic loss. Large conversion libraries were required, and maintaining context was difficult.
