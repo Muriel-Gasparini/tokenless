@@ -7,7 +7,7 @@ export enum TokenType {
 export enum TransformSource {
   COMPOUND_PATTERN = 'COMPOUND_PATTERN',
   ABBREVIATION = 'ABBREVIATION',
-  SINGLE_WORD_CONTRACTION = 'SINGLE_WORD_CONTRACTION',
+  CONTRACTION = 'CONTRACTION',
 }
 
 export interface Token {

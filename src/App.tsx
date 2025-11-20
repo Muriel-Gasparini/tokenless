@@ -30,14 +30,27 @@ function App() {
       return;
     }
 
-    const compressionResult = orchestrator.compress(debouncedInput);
-    setResult(compressionResult);
+    let cancelled = false;
 
-    if (autoCopy && compressionResult.compressed) {
-      navigator.clipboard.writeText(compressionResult.compressed);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    }
+    const performCompression = async () => {
+      const compressionResult = await orchestrator.compress(debouncedInput);
+
+      if (cancelled) return;
+
+      setResult(compressionResult);
+
+      if (autoCopy && compressionResult.compressed) {
+        navigator.clipboard.writeText(compressionResult.compressed);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      }
+    };
+
+    performCompression();
+
+    return () => {
+      cancelled = true;
+    };
   }, [debouncedInput, autoCopy]);
 
   const handleCopy = async (text: string) => {

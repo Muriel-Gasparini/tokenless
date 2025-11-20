@@ -3,19 +3,22 @@ import { countTokens, calculateReduction } from './tokenizer';
 import { CompoundPatternDetector } from '../detection/pattern-detector';
 import { Token, tokensToText } from '../token';
 import { TokenBaseStrategy } from '../strategies/base/strategy';
+import { TranslationService } from '../services/translation';
 import { PolitenessRemovalStrategy } from '../strategies/implementations/politeness-removal';
 import { StopwordRemovalStrategy } from '../strategies/implementations/stopword-removal';
 import { AbbreviationStrategy } from '../strategies/implementations/abbreviation';
 import { ConnectorRemovalStrategy } from '../strategies/implementations/connector-removal';
-import { SingleWordContractionStrategy } from '../strategies/implementations/single-word-contraction';
-import { getCompoundContractions } from '../data/ptbr-contractions';
-import { getCompoundAbbreviations } from '../data/tech-dict';
+import { ContractionStrategy } from '../strategies/implementations/contraction';
+import { getCompoundContractions, getCompoundAbbreviations } from '../data/dict';
 
 export class CompressionOrchestrator {
+  private readonly translationService: TranslationService;
   private readonly patternDetector: CompoundPatternDetector;
   private readonly strategies: TokenBaseStrategy[];
 
   constructor() {
+    this.translationService = new TranslationService();
+
     const compoundPatterns: [string, string][] = [
       ...getCompoundContractions(),
       ...getCompoundAbbreviations(),
@@ -28,16 +31,18 @@ export class CompressionOrchestrator {
       new StopwordRemovalStrategy(),
       new AbbreviationStrategy(),
       new ConnectorRemovalStrategy(),
-      new SingleWordContractionStrategy(),
+      new ContractionStrategy(),
     ].sort((a, b) => a.priority - b.priority);
   }
 
-  compress(text: string): CompressionResult {
+  async compress(text: string): Promise<CompressionResult> {
     if (!text || text.trim().length === 0) {
       return {
         original: text,
+        translated: text,
         compressed: text,
         originalTokens: 0,
+        translatedTokens: 0,
         compressedTokens: 0,
         reduction: 0,
         strategiesApplied: [],
@@ -46,7 +51,10 @@ export class CompressionOrchestrator {
 
     const originalTokens = countTokens(text);
 
-    let tokens: Token[] = this.patternDetector.detect(text);
+    const translatedText = await this.translationService.translateToEnglish(text);
+    const translatedTokens = countTokens(translatedText);
+
+    let tokens: Token[] = this.patternDetector.detect(translatedText);
 
     const appliedStrategies: string[] = [];
 
@@ -62,8 +70,10 @@ export class CompressionOrchestrator {
 
     return {
       original: text,
+      translated: translatedText,
       compressed: compressedText,
       originalTokens,
+      translatedTokens,
       compressedTokens,
       reduction: calculateReduction(originalTokens, compressedTokens),
       strategiesApplied: appliedStrategies,

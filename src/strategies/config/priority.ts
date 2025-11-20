@@ -4,4 +4,7 @@ export enum StrategyPriority {
   ABBREVIATION = 30,
   CONNECTOR_REMOVAL = 40,
   SINGLE_WORD_CONTRACTION = 50,
+  CONTRACTION = 50,
 }
+
+export const PRIORITY = StrategyPriority;
