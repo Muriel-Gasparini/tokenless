@@ -6,10 +6,6 @@ export interface TranslationResult {
   to: string;
 }
 
-interface GoogleTranslateResponse {
-  detectedSourceLanguage?: string;
-}
-
 export class TranslationService {
   private async fetchTranslation(
     text: string,
