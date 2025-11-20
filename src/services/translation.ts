@@ -1,6 +1,6 @@
 import translate from "google-translate-api-browser";
 
-const CORS_PROXY = "https://proxy.corsfix.com/";
+const CORS_PROXY = "https://corsproxy.io/?url=";
 
 export interface TranslationResult {
   text: string;
